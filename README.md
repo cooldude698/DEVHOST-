@@ -765,8 +765,15 @@ This project is licensed under the [MIT License](LICENSE) — free for education
 - **Event**: DevHost 2026 — 36-Hour Hackathon
 - **Problem Statement Track**: **PS 4.1 — AI Agent for Travel Disruption Recovery**
 
-### Team Information
-- **Lead Developer**: Aman Jain ([@cooldude698](https://github.com/cooldude698))
+### Team Information & Role Distribution
+
+| Team Member | Role | Assigned Tasks & Responsibilities |
+| :--- | :--- | :--- |
+| **Aman Jain** ([@cooldude698](https://github.com/cooldude698)) | **Team Lead & System Architecture** | • Repository orchestration & project management<br>• Core architecture design and data contract modeling<br>• End-to-end integration across API, recovery engine, and UI<br>• Documentation, Git workflows, and deployment configuration |
+| **Swapnil Ghosh** | **Backend & Recovery Engine Lead** | • Deterministic constraint validation engine (deadlines, budgets, availability)<br>• Multi-criteria alternative ranking algorithm & utility scoring<br>• FastAPI endpoint development (`/api/trips`, `/api/recovery/analyze`)<br>• In-memory data store & repository queries for curated transit routes |
+| **Vedesh Khatri** | **AI Agent & Explanation Engineer** | • LLM prompt engineering for disruption summarization & trade-off explanations<br>• Natural language requirement parsing & constraint extraction<br>• Structured output validation & Pydantic schema enforcement<br>• Offline resilience and mock provider fallback implementation |
+| **Aryan Bhojgaria** | **Frontend & UI/UX Engineer** | • Responsive web dashboard using React, TypeScript & Tailwind CSS<br>• Interactive journey comparison cards and constraint status badges<br>• Visual disruption alert banners & step-by-step revised itinerary view<br>• Conflict relaxation sliders (budget expansion, deadline extension) |
+
 - **Repository**: [https://github.com/cooldude698/DEVHOST-](https://github.com/cooldude698/DEVHOST-)
 
 ---
