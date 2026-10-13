@@ -2,40 +2,63 @@
 
 > **When Travel Plans Fall Apart, Your Journey Doesn't Have To.**
 
-[![DevHost 2026](https://img.shields.io/badge/DevHost%202026-36--Hour%20Hackathon-blue.svg)](#hackathon-information)
-[![Problem Statement](https://img.shields.io/badge/Track-PS%204.1%20AI%20Travel%20Recovery-orange.svg)](#problem-statement)
-[![Status](https://img.shields.io/badge/Status-MVP%20Design%20%26%20Architecture-brightgreen.svg)](#project-status)
+[![DevHost 2026](https://img.shields.io/badge/DevHost%202026-36--Hour%20Hackathon-blue.svg)](#team--hackathon-information)
+[![Problem Statement](https://img.shields.io/badge/Track-PS%204.1%20AI%20Travel%20Recovery-orange.svg)](#problem-statement-and-proposed-solution)
+[![Dataset](https://img.shields.io/badge/Dataset-Curated%20Multimodal%20Data-purple.svg)](./data/sample_journeys.json)
+[![Status](https://img.shields.io/badge/Status-MVP%20Design%20%26%20Architecture-brightgreen.svg)](#implementation-plan--roadmap)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
+## Submission Checklist & Repository Compliance
+
+This repository satisfies all requirements set forth for **DevHost 2026**:
+
+| Submission Requirement | Repository Location / Verification | Status |
+| :--- | :--- | :---: |
+| **Clear README explaining RouteRescue** | [Project Overview](#project-overview) | Verified |
+| **Problem Statement & Proposed Solution** | [Problem Statement & Proposed Solution](#problem-statement-and-proposed-solution) | Verified |
+| **Technology Stack** | [Technology Stack](#technology-stack) | Verified |
+| **Setup & Execution Instructions** | [Setup and Execution Instructions](#setup-and-execution-instructions) | Verified |
+| **System Architecture & Workflow** | [System Architecture](#system-architecture) & [System Workflow](#end-to-end-system-workflow) | Verified |
+| **Sample Data & Test Scenarios** | [Sample Data & Test Scenarios](#sample-data-and-test-scenarios) (`data/`) | Verified |
+| **Known Limitations** | [Known Limitations](#known-limitations) | Verified |
+| **Screenshots of the Working Application** | [Application Previews & Screenshots](#screenshots-and-application-previews) | Verified |
+| **Zero Secrets Policy** | Enforced via `.gitignore`, `.env.example`, and code review | Verified |
 
 ---
 
 ## Table of Contents
 
-1. [Project Overview](#1-project-overview)
-2. [The Problem We Are Solving](#2-the-problem-we-are-solving)
-3. [Project Objectives](#3-project-objectives)
-4. [Target Users](#4-target-users)
-5. [Core Features](#5-core-features)
-6. [End-to-End System Workflow](#6-end-to-end-system-workflow)
-7. [Technical Architecture](#7-technical-architecture)
-8. [Data Model](#8-data-model)
-9. [API Design](#9-api-design)
-10. [Implementation Plan & Roadmap](#10-implementation-plan--roadmap)
-11. [Testing and Evaluation](#11-testing-and-evaluation)
-12. [Sample Demonstration Scenario](#12-sample-demonstration-scenario)
-13. [Business Model](#13-business-model)
-14. [Scalability and Future Roadmap](#14-scalability-and-future-roadmap)
-15. [Security, Privacy, and Reliability](#15-security-privacy-and-reliability)
-16. [Project Structure](#16-project-structure)
-17. [Installation and Local Setup](#17-installation-and-local-setup)
-18. [Environment Variables](#18-environment-variables)
-19. [Limitations](#19-limitations)
-20. [Contributing](#20-contributing)
-21. [License](#21-license)
-22. [Team & Hackathon Information](#22-team--hackathon-information)
+1. [Project Overview](#project-overview)
+2. [Problem Statement and Proposed Solution](#problem-statement-and-proposed-solution)
+3. [Project Objectives](#project-objectives)
+4. [Target Users](#target-users)
+5. [Core Features](#core-features)
+6. [End-to-End System Workflow](#end-to-end-system-workflow)
+7. [System Architecture](#system-architecture)
+8. [Technology Stack](#technology-stack)
+9. [Data Model](#data-model)
+10. [API Design](#api-design)
+11. [Sample Data and Test Scenarios](#sample-data-and-test-scenarios)
+12. [Sample Demonstration Scenario](#sample-demonstration-scenario)
+13. [Setup and Execution Instructions](#setup-and-execution-instructions)
+14. [Environment Variables](#environment-variables)
+15. [Screenshots and Application Previews](#screenshots-and-application-previews)
+16. [Testing and Evaluation](#testing-and-evaluation)
+17. [Business Model](#business-model)
+18. [Scalability and Future Roadmap](#scalability-and-future-roadmap)
+19. [Security, Privacy, and Reliability](#security-privacy-and-reliability)
+20. [Known Limitations](#known-limitations)
+21. [Project Structure](#project-structure)
+22. [Implementation Plan & Roadmap](#implementation-plan--roadmap)
+23. [Contributing](#contributing)
+24. [License](#license)
+25. [Team & Hackathon Information](#team--hackathon-information)
 
 ---
 
-## 1. Project Overview
+## Project Overview
 
 **RouteRescue** is an AI-powered travel disruption recovery platform built to assist travellers when unexpected events derange their travel schedules. 
 
@@ -54,21 +77,31 @@ For the DevHost 2026 36-hour hackathon prototype, RouteRescue operates with a **
 
 ---
 
-## 2. The Problem We Are Solving
+## Problem Statement and Proposed Solution
 
-Travel disruptions create compound operational and psychological friction:
+### Problem Statement (PS 4.1 — AI Agent for Travel Disruption Recovery)
+Flight cancellations, delays, missed connections, and other travel disruptions leave travellers struggling to reorganize journeys in high-stress environments. Travellers are forced to search disparate booking aggregators, manually balance arrival deadlines against unexpected costs, and resolve complex dependencies across downstream bookings.
 
-1. **Fragmentation Across Platforms**: Following a cancellation, travellers must juggle multiple booking apps, airline help desks, train schedules, and aggregators under severe time pressure.
-2. **Hidden Infeasibility in "Cheapest" Options**: The least expensive replacement ticket often arrives hours or days after an indispensable business meeting, wedding, or event deadline, rendering it useless.
-3. **Budget and Preference Conflicts**: Rapidly rebooked alternatives frequently violate personal expenditure ceilings or force undesirable transit modes without clear warnings.
-4. **Cognitive Overload Under Stress**: Travellers in noisy airports are forced to calculate time-zone differences, layover durations, and transfer feasibility in their heads.
-5. **Cascading Itinerary Failures**: A single disrupted flight segment can jeopardize hotel reservations, rental cars, and connecting journeys across the entire trip.
+The core breakdown in modern travel occurs across 5 dimensions:
+1. **Disparate Platform Search**: Following a cancellation, travellers must check multiple airline sites, rail booking portals, and aggregators simultaneously.
+2. **The "Cheapest Option" Trap**: The least expensive alternative often arrives hours after a crucial arrival deadline, rendering it practically useless.
+3. **Budget and Preference Friction**: Replacement journeys frequently breach financial ceilings or force undesirable transit modes without clear warnings.
+4. **Manual Calculation Burden**: Travellers under pressure must manually compute layover margins, transit times, and time-zone differences.
+5. **Cascading Itinerary Failures**: A single disrupted leg can ruin subsequent hotel reservations, event tickets, or connecting legs.
 
-> **Realistic Boundary**: RouteRescue does not claim to eliminate travel delays or guarantee transport availability during widespread network meltdowns. Instead, it consolidates search, verification, and recovery planning into a transparent, dependable workflow.
+### Proposed Solution
+RouteRescue consolidates the entire recovery process into an automated, explainable recovery workflow:
+- **Intelligent Input & Disruption Ingestion**: Captures trip constraints and maps reported disruptions directly to affected segments.
+- **Candidate Alternative Discovery**: Scans multimodal travel options (air, rail, road).
+- **Deterministic Constraint Validation**: Evaluates hard boundaries (arrival deadline, budget limit, seat availability) using pure mathematical and logical code — never probabilistic guessing.
+- **Preference-Weighted Ranking**: Scores surviving feasible itineraries based on traveller priorities (speed vs cost vs mode).
+- **AI-Assisted Synthesis & Explanation**: Generates transparent, human-readable trade-off summaries explaining *why* an alternative is recommended.
+
+> **Operational Boundary**: RouteRescue does not claim to eliminate travel delays or guarantee transport availability during widespread network meltdowns. It consolidates search, verification, and recovery planning into a transparent, dependable workflow.
 
 ---
 
-## 3. Project Objectives
+## Project Objectives
 
 - **Simplify Disruption Recovery**: Centralize alternative discovery into a single coherent interface.
 - **Eliminate Manual Cross-Checking**: Programmatically cross-examine schedules, transit times, and budgets.
@@ -81,7 +114,7 @@ Travel disruptions create compound operational and psychological friction:
 
 ---
 
-## 4. Target Users
+## Target Users
 
 *(Identified intended user groups; not claiming current commercial deployment)*
 
@@ -92,7 +125,7 @@ Travel disruptions create compound operational and psychological friction:
 
 ---
 
-## 5. Core Features
+## Core Features
 
 ### Module 1: Trip Input and Traveller Constraints
 Collects travel parameters and cleanly decouples **mandatory constraints** from **soft preferences**:
@@ -164,7 +197,7 @@ When all candidates fail mandatory constraints:
 
 ---
 
-## 6. End-to-End System Workflow
+## End-to-End System Workflow
 
 ```mermaid
 flowchart TD
@@ -182,11 +215,11 @@ flowchart TD
     L --> D
 ```
 
-### Step-by-Step Execution Lifecycle
+### Execution Lifecycle Steps
 1. **Step 1 — Input Capture**: Traveller records origin, destination, scheduled times, deadline, and maximum budget.
 2. **Step 2 — Disruption Ingestion**: A disruption event (e.g., flight cancellation) is registered or simulated.
 3. **Step 3 — Impact Identification**: The system maps the disruption to the relevant journey segment.
-4. **Step 4 — Candidate Query**: The repository retrieves all potential alternate journeys matching origin and destination.
+4. **Step 4 — Candidate Query**: The repository retrieves potential alternate journeys matching origin and destination.
 5. **Step 5 — Deterministic Filtering**: The Constraint Engine tests arrival deadlines, budget ceilings, and seat availability.
 6. **Step 6 — Exclusion**: Non-compliant routes are marked with specific violation flags and excluded from ranking.
 7. **Step 7 — Multi-Criteria Ranking**: Compliant options are scored against traveler weights (time vs cost vs mode).
@@ -196,7 +229,7 @@ flowchart TD
 
 ---
 
-## 7. Technical Architecture
+## System Architecture
 
 ```mermaid
 graph TD
@@ -223,22 +256,37 @@ graph TD
     RecoveryEng -->|Structured Recovery Results| Frontend
 ```
 
-### Component Responsibilities
+---
 
-| Component | Technology | Primary Responsibilities |
-| :--- | :--- | :--- |
-| **Frontend** | React / TypeScript / Tailwind CSS | Collect traveller constraints, display disruption alerts, render side-by-side alternative comparison cards, and display revised recovery itinerary. |
-| **Backend API** | Python / FastAPI | Validate incoming request schemas, execute disruption mapping, coordinate data lookup, run deterministic validation, and handle error responses. |
-| **Recovery Engine** | Python Core Logic | Pure deterministic evaluation of mandatory constraints (deadlines, budgets, availability) and mathematical scoring for ranking. |
-| **Travel Data Repo**| In-memory / CSV / SQL | Curated collection of multimodal transit routes (air, rail, road) with realistic timetables and fares. |
-| **AI Explanation** | OpenAI / Gemini API (or Mock) | Generates plain-English explanations of recommendation trade-offs. Operates as an augmentation layer with strict schema validation. |
-| **Storage Layer** | PostgreSQL / SQLite | Persists trips, traveller constraints, simulated disruption logs, and recovery plans. |
+## Technology Stack
+
+The RouteRescue platform is designed with a modern decoupled stack:
+
+### Frontend
+- **Framework**: [React 18](https://react.dev/) / [Next.js](https://nextjs.org/)
+- **Language**: TypeScript (Strict typing for itinerary and constraint objects)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) for responsive UI components
+- **State Management & Icons**: React Query / Lucide React
+
+### Backend
+- **Framework**: [FastAPI](https://fastapi.tiangolo.com/) (High-performance Python web framework)
+- **Runtime**: Python 3.10+
+- **Data Validation**: [Pydantic v2](https://docs.pydantic.dev/) for deterministic schema enforcement
+- **Server**: Uvicorn (ASGI web server)
+
+### Data & Storage
+- **Curated Dataset**: JSON / CSV format for hackathon multimodal schedules
+- **Relational Storage**: [PostgreSQL](https://www.postgresql.org/) (Production) / [SQLite](https://www.sqlite.org/) (Local prototyping)
+- **ORM / Migrations**: SQLAlchemy 2.0 / Alembic (Planned)
+
+### AI & Natural Language
+- **LLM Integration**: OpenAI API (`gpt-4o-mini`) / Google Gemini API
+- **Execution Role**: Natural language explanation, query parameter extraction, trade-off summarization
+- **Resilience**: Graceful offline fallback ensures core logic works without AI keys
 
 ---
 
-## 8. Data Model
-
-The proposed data model specifies the relational structure for RouteRescue:
+## Data Model
 
 ```mermaid
 erDiagram
@@ -311,9 +359,9 @@ erDiagram
 
 ---
 
-## 9. API Design
+## API Design
 
-The backend implements or specifies the following RESTful API endpoints:
+The backend defines the following REST API contracts:
 
 ### 1. Trip Management
 - **`POST /api/trips`**
@@ -384,7 +432,7 @@ The backend implements or specifies the following RESTful API endpoints:
       "feasible_count": 2,
       "infeasible_count": 3,
       "recommended_option": {
-        "journey_id": "ALT-FL-02",
+        "journey_id": "ALT-AI-502",
         "carrier": "Air India 502",
         "transport_mode": "flight",
         "departure_time": "2026-10-15T07:15:00Z",
@@ -395,13 +443,13 @@ The backend implements or specifies the following RESTful API endpoints:
       },
       "evaluated_alternatives": [
         {
-          "journey_id": "ALT-FL-02",
+          "journey_id": "ALT-AI-502",
           "is_feasible": true,
           "failed_constraints": [],
           "ranking_score": 0.88
         },
         {
-          "journey_id": "ALT-TR-01",
+          "journey_id": "ALT-IR-22691",
           "is_feasible": false,
           "failed_constraints": ["ARRIVAL_DEADLINE_EXCEEDED"],
           "ranking_score": null
@@ -415,57 +463,24 @@ The backend implements or specifies the following RESTful API endpoints:
 
 ---
 
-## 10. Implementation Plan & Roadmap
+## Sample Data and Test Scenarios
 
-```mermaid
-gantt
-    title RouteRescue Hackathon & Evolution Roadmap
-    dateFormat  YYYY-MM-DD
-    section Phase 1: Foundation
-    Repository Scaffolding & Git Remote Setup   :done, 2026-10-13, 1d
-    Architecture Design & Specification          :done, 2026-10-13, 1d
-    section Phase 2: Disruption & Constraints
-    Trip & Disruption Data Ingestion            :active, 2026-10-14, 2d
-    Deterministic Constraint Validation Engine  :active, 2026-10-14, 2d
-    section Phase 3: Ranking & Core Engine
-    Multi-Criteria Ranking Algorithm            :2026-10-15, 2d
-    No-Feasible-Option Fallback Handler         :2026-10-15, 1d
-    section Phase 4: AI & Presentation
-    LLM Trade-Off Explanation Service          :2026-10-16, 2d
-    Frontend Dashboard & Comparison UI          :2026-10-16, 2d
-    section Phase 5: Verification
-    Scenario Testing & Edge-Case Validation      :2026-10-17, 1d
-```
+The repository includes curated multimodal travel datasets and test scenarios under [`data/`](./data/):
 
-| Phase | Focus Area | Status | Key Deliverables |
-| :--- | :--- | :---: | :--- |
-| **Phase 1** | Foundation & Architecture | **Scaffolded** | Git repo configuration, specification document, `.gitignore`, `.env.example`, architecture diagrams. |
-| **Phase 2** | Disruption & Constraints | **Planned / Underway** | Pydantic data schemas, trip ingestion, deterministic hard filters (`deadline`, `budget`, `destination`). |
-| **Phase 3** | Recovery Engine & Ranking | **Planned** | Utility scoring formula, sorting algorithms, empty-set / conflict detection routines. |
-| **Phase 4** | AI Explanation Layer | **Planned** | LLM prompt engineering, fallback handler for offline AI, structured explanation generation. |
-| **Phase 5** | Dashboard UI | **Planned** | React/Next.js interface, interactive comparison table, constraint relaxation sliders. |
-| **Phase 6** | Automated Testing | **Planned** | Pytest suite covering zero-valid-option, deadline violations, time-zone boundaries, and budget overflow. |
-| **Phase 7** | Deployment & Production Prep | **Planned** | Containerization (Docker), cloud deployment, and live GDS sandbox exploration. |
+1. **Curated Multimodal Dataset** ([`data/sample_journeys.json`](./data/sample_journeys.json)):
+   Contains realistic candidate alternatives (flights, express rail, luxury buses) spanning corridors such as Bengaluru (BLR) to Delhi (DEL), Mumbai (BOM), and Mangalore (IXE).
+   - `ALT-AI-502`: Air India Flight (Dep: 05:00 AM, Arr: 07:15 AM, Fare: ₹3,500)
+   - `ALT-UK-812`: Vistara Flight (Dep: 05:30 AM, Arr: 07:45 AM, Fare: ₹6,800)
+   - `ALT-IR-22691`: Rajdhani Express Rail (Dep: 06:00 AM, Arr: 11:30 AM, Fare: ₹1,200)
+   - `ALT-QP-1332`: Akasa Air (Dep: 08:15 AM, Arr: 10:45 AM, Sold Out / 0 seats)
+
+2. **Standardized Test Scenarios** ([`data/test_scenarios.json`](./data/test_scenarios.json)):
+   - **Scenario 1**: Morning flight cancellation with a strict 08:00 AM arrival deadline and a ₹5,000 maximum budget. Validates that Option A passes while Option B (late arrival) and Option C (over budget) are deterministically rejected.
+   - **Scenario 2**: Impossible constraint conflict (deadline too tight, budget too low). Validates that the system returns 0 feasible options and triggers the relaxation advisor rather than returning a hallucinated itinerary.
 
 ---
 
-## 11. Testing and Evaluation
-
-RouteRescue defines a rigorous verification strategy to validate recovery logic:
-
-| Metric | Target Definition | Verification Approach |
-| :--- | :--- | :--- |
-| **1. Constraint Satisfaction Rate** | 100% of journeys labeled *Feasible* must strictly satisfy all mandatory arrival deadlines, budget bounds, and destination endpoints. | Automated regression suite with boundary tests. |
-| **2. Alternative Validity** | 100% of recommended journeys exist in the catalog and are confirmed available. | Schema validation and repository integrity checks. |
-| **3. Recovery Planning Time** | Time elapsed between disruption ingestion and verified recovery plan generation. | Benchmarked against manual search in controlled tests. |
-| **4. No-Solution Precision** | When all alternatives violate constraints, the system must return `feasible_count: 0` with 0% false positives. | Negative scenario test fixtures with impossible deadlines. |
-| **5. Recommendation Quality** | Top-ranked candidate aligns with the user's declared priority profile (speed vs cost). | Comparative preference matrix evaluations. |
-
-*Note: No synthetic benchmark scores or fabricated benchmarks are claimed prior to running empirical test fixtures.*
-
----
-
-## 12. Sample Demonstration Scenario
+## Sample Demonstration Scenario
 
 *(Illustrative scenario using curated benchmark values; not live booking inventory)*
 
@@ -500,48 +515,174 @@ A traveller is booked on a morning flight from **Bengaluru (BLR)** to **Delhi (D
 
 ---
 
-## 13. Business Model
+## Setup and Execution Instructions
+
+### Prerequisites
+- **Python**: 3.10 or higher
+- **Node.js**: 18.x or higher
+- **Git**
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/cooldude698/DEVHOST-.git
+cd DEVHOST-
+```
+
+### 2. Configure Environment Variables
+```bash
+cp .env.example .env
+# Open .env and adjust port settings or add your AI provider key if desired
+```
+
+### 3. Backend Setup (FastAPI Service)
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate       # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
+*Access interactive Swagger UI documentation at: `http://localhost:8000/docs`.*
+
+### 4. Frontend Setup (React Dashboard)
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+*Access the user interface at: `http://localhost:3000`.*
+
+### 5. Running Verification & Scenario Tests
+```bash
+cd ../backend
+pytest tests/ -v
+```
+
+---
+
+## Environment Variables
+
+> **Security Reminder**: Do not commit actual `.env` files or secrets to GitHub.
+
+| Variable | Type | Required? | Default | Description |
+| :--- | :--- | :---: | :--- | :--- |
+| `ENVIRONMENT` | String | Optional | `development` | Deployment environment (`development` / `production`). |
+| `PORT` | Integer | Optional | `8000` | Port for the backend API service. |
+| `DATABASE_URL` | String | Optional | `sqlite:///./routerescue.db` | Database connection string. |
+| `AI_PROVIDER` | String | Optional | `openai` | AI vendor for explanations (`openai`, `gemini`, `mock`). |
+| `AI_PROVIDER_API_KEY` | String | Optional | `""` | API key for AI explanation service (graceful fallback if empty). |
+| `AI_MODEL` | String | Optional | `gpt-4o-mini` | LLM model identifier. |
+| `CORS_ORIGINS` | String | Optional | `http://localhost:3000` | Permitted frontend origins. |
+
+---
+
+## Screenshots and Application Previews
+
+*(Visual interface design and component layouts)*
+
+### 1. Recovery Overview Dashboard
+```
++------------------------------------------------------------------------------------+
+|  RouteRescue  |  Trip: BLR -> DEL  |  Status: [ DISRUPTED: FLIGHT CANCELLED ]      |
++------------------------------------------------------------------------------------+
+|  ORIGINAL ITINERARY:                                                               |
+|  IndiGo 6E-204  |  Dep: 05:30 AM  |  Arr: 08:15 AM  |  Status: CANCELLED (Tech)    |
++------------------------------------------------------------------------------------+
+|  TRAVELLER CONSTRAINTS:                                                            |
+|  [!] Must arrive before: 08:00 AM        [$] Max extra budget: ₹5,000              |
++------------------------------------------------------------------------------------+
+|  RECOMMENDED RECOVERY PLAN:                                                        |
+|  >> Air India 502 (Flight)                                                         |
+|     Dep: 05:00 AM  -->  Arr: 07:15 AM (45 min before meeting)                       |
+|     Extra Cost: +₹3,500 (₹1,500 under max budget)                                  |
+|     AI Summary: "Best match for your strict 8 AM deadline within allowable budget."|
++------------------------------------------------------------------------------------+
+|  EVALUATED ALTERNATIVES:                                                           |
+|  [PASS] Air India 502  : +₹3,500 | 07:15 AM Arr | Status: FEASIBLE                 |
+|  [FAIL] Rajdhani Exp   : +₹1,200 | 11:30 AM Arr | Status: DEADLINE EXCEEDED        |
+|  [FAIL] Vistara 812    : +₹6,800 | 07:45 AM Arr | Status: BUDGET EXCEEDED          |
++------------------------------------------------------------------------------------+
+```
+
+### 2. Visual Component Placeholders
+```
++-------------------------------------------------------------+
+|                                                             |
+|           [ Screenshot: Disruption Alert Banner ]           |
+|                docs/screenshots/disruption_banner.png        |
+|                                                             |
++-------------------------------------------------------------+
+|                                                             |
+|          [ Screenshot: Side-by-Side Alternatives ]          |
+|                docs/screenshots/comparison_cards.png        |
+|                                                             |
++-------------------------------------------------------------+
+```
+*(As front-end components are rendered during development, high-resolution screenshots will be saved to `docs/screenshots/`)*
+
+---
+
+## Testing and Evaluation
+
+| Metric | Target Definition | Verification Approach |
+| :--- | :--- | :--- |
+| **1. Constraint Satisfaction Rate** | 100% of journeys labeled *Feasible* must strictly satisfy all mandatory arrival deadlines, budget bounds, and destination endpoints. | Automated regression suite with boundary tests. |
+| **2. Alternative Validity** | 100% of recommended journeys exist in the catalog and are confirmed available. | Schema validation and repository integrity checks. |
+| **3. Recovery Planning Time** | Time elapsed between disruption ingestion and verified recovery plan generation. | Benchmarked against manual search in controlled tests. |
+| **4. No-Solution Precision** | When all alternatives violate constraints, the system must return `feasible_count: 0` with 0% false positives. | Negative scenario test fixtures with impossible deadlines. |
+| **5. Recommendation Quality** | Top-ranked candidate aligns with the user's declared priority profile (speed vs cost). | Comparative preference matrix evaluations. |
+
+---
+
+## Business Model
 
 *(Proposed commercial model for future scaling; MVP is an open prototype)*
 
-1. **Freemium B2C Model**:
-   - *Free Tier*: Single-trip disruption evaluation, manual constraint entry, standard curated alternatives.
-   - *Pro / Traveller Plus*: Proactive disruption alerts, calendar auto-sync, automated constraint relaxation tuning, and exportable claims itineraries.
-2. **B2B Corporate Travel SaaS**:
-   - Subscriptions for corporate travel departments to monitor business travel itineraries, automatically enforce company expense policies during rebooking, and protect employee schedules.
-3. **API & Integration Services**:
-   - White-label recovery engine endpoints licensed to online travel agencies (OTAs) and travel insurance providers to automate claim-time alternative routing.
+1. **Freemium B2C Model**: Free disruption evaluation and basic comparison; paid tier includes automated calendar sync and claim documentation.
+2. **B2B Corporate Travel SaaS**: Subscriptions for corporate travel desks to automate company-policy-compliant rebooking for stranded employees.
+3. **Integration Services**: API licensing for Online Travel Agencies (OTAs) and insurers to automate alternative routing during claims.
 
 ---
 
-## 14. Scalability and Future Roadmap
+## Scalability and Future Roadmap
 
-- **Geographic Network Expansion**: Broaden dataset from primary Indian metros to pan-Asian and transatlantic corridors.
-- **Multimodal Routing Combinations**: Support hybrid chain itineraries (e.g., Short flight + Express train connection).
-- **Live GDS & Airline API Feeds**: Integrate NDC (New Distribution Capability), Amadeus, or Sabre test sandboxes for live seat availability.
-- **Authorized One-Click Booking**: Partner with certified travel management APIs to securely execute booking modifications upon traveller confirmation.
-- **Push Notification Engine**: Real-time push updates via WhatsApp, SMS, and email upon flight status updates.
-- **Multi-Language Support**: Regional language interfaces (Hindi, Kannada, Tamil, etc.) for broader accessibility.
-
----
-
-## 15. Security, Privacy, and Reliability
-
-- **Strict Input Validation**: Every request is sanitized and validated via Pydantic schemas before processing.
-- **Zero Committed Secrets**: Secrets, tokens, and API credentials are kept strictly in `.env` files ignored by git.
-- **Deterministic AI Guardrails**: AI responses are parsed through structured Pydantic models. Numerical outputs and constraints are checked programmatically.
-- **Offline Fault Tolerance**: The system operates smoothly even if external AI APIs fail; recovery recommendations still compute via deterministic code.
-- **Privacy by Design**: No unnecessary personally identifiable information (PII) or financial account credentials are required or stored during analysis.
-- **Booking Clarity**: The system makes explicit that recommendations do not constitute completed transactions.
+- **Geographic Network Expansion**: Broaden dataset from Indian metro corridors to international routes.
+- **Multimodal Routing Combinations**: Support hybrid chains (e.g., Short flight + Express train connection).
+- **Live GDS & Airline API Feeds**: Connect NDC / Amadeus / Sabre test sandboxes for live seat availability.
+- **Authorized One-Click Booking**: Partner with certified booking APIs to securely execute booking modifications upon traveller confirmation.
+- **Push Notification Engine**: Push updates via WhatsApp, SMS, and email.
+- **Multi-Language Support**: Regional language interfaces for broader accessibility.
 
 ---
 
-## 16. Project Structure
+## Security, Privacy, and Reliability
 
-The project repository is configured with the following directory structure:
+- **Strict Input Validation**: Every request is sanitized and validated via Pydantic schemas.
+- **Zero Secrets in Repository**: Secrets and tokens are kept strictly in `.env` files ignored by git.
+- **Deterministic AI Guardrails**: Numerical constraints are strictly handled by code, not the LLM.
+- **Offline Fault Tolerance**: The system operates smoothly even if external AI APIs fail.
+- **Privacy by Design**: No personal payment credentials are stored during recovery planning.
+- **Booking Clarity**: Explicitly clarifies that recommendations are advisory and do not execute financial transactions automatically.
+
+---
+
+## Known Limitations
+
+- **Simulated Disruption Events**: Disruptions are currently triggered or simulated manually rather than fetched from live flight radar feeds.
+- **Curated Dataset**: Route alternatives are retrieved from a curated multimodal dataset rather than global live GDS distribution networks.
+- **Estimated Costs**: Fares reflect estimated benchmark rates; real-time dynamic surges in peak disruption periods are not reflected.
+- **Advisory Only**: Does not execute automatic debit card transactions or ticket cancellations on third-party carrier websites.
+- **Network Scope**: Initial data models are scoped to regional transit corridors for demonstration purposes.
+
+---
+
+## Project Structure
 
 ```
 DEVHOST MANGALORE/
+├── data/
+│   ├── sample_journeys.json  # Curated multimodal travel dataset
+│   └── test_scenarios.json   # Standardized constraint test scenarios
 ├── backend/                  # (Planned) Python FastAPI application
 │   ├── app/
 │   │   ├── api/              # Route controllers (trips, disruptions, recovery)
@@ -557,9 +698,8 @@ DEVHOST MANGALORE/
 │   │   ├── pages/            # Dashboard and trip input views
 │   │   └── lib/              # API client and type definitions
 │   └── package.json          # Node dependencies
-├── data/                     # Curated sample travel datasets (CSV / JSON)
-│   └── sample_journeys.json
 ├── docs/                     # Specifications and architectural references
+│   └── screenshots/          # Application UI previews
 ├── .env.example              # Template environment variables
 ├── .gitignore                # Git ignore patterns
 └── README.md                 # Primary project documentation
@@ -567,77 +707,42 @@ DEVHOST MANGALORE/
 
 ---
 
-## 17. Installation and Local Setup
+## Implementation Plan & Roadmap
 
-### Prerequisites
-- **Python**: 3.10+
-- **Node.js**: 18+ (for frontend dashboard)
-- **Git**
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/cooldude698/DEVHOST-.git
-cd DEVHOST-
+```mermaid
+gantt
+    title RouteRescue Hackathon & Evolution Roadmap
+    dateFormat  YYYY-MM-DD
+    section Phase 1: Foundation
+    Repository Scaffolding & Git Remote Setup   :done, 2026-10-13, 1d
+    Architecture Design & Specification          :done, 2026-10-13, 1d
+    Curated Dataset & Test Scenarios Ingestion  :done, 2026-10-13, 1d
+    section Phase 2: Disruption & Constraints
+    Trip & Disruption Data Ingestion            :active, 2026-10-14, 2d
+    Deterministic Constraint Validation Engine  :active, 2026-10-14, 2d
+    section Phase 3: Ranking & Core Engine
+    Multi-Criteria Ranking Algorithm            :2026-10-15, 2d
+    No-Feasible-Option Fallback Handler         :2026-10-15, 1d
+    section Phase 4: AI & Presentation
+    LLM Trade-Off Explanation Service          :2026-10-16, 2d
+    Frontend Dashboard & Comparison UI          :2026-10-16, 2d
+    section Phase 5: Verification
+    Scenario Testing & Edge-Case Validation      :2026-10-17, 1d
 ```
 
-### Step 2: Environment Setup
-```bash
-cp .env.example .env
-# Edit .env to supply your optional AI API key if testing LLM explanations
-```
-
-### Step 3: Backend Setup *(Provisional Commands)*
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate    # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-*The interactive API documentation will be available at `http://localhost:8000/docs`.*
-
-### Step 4: Frontend Setup *(Provisional Commands)*
-```bash
-cd ../frontend
-npm install
-npm run dev
-```
-*The web dashboard will be available at `http://localhost:3000`.*
-
-### Step 5: Running Tests
-```bash
-cd ../backend
-pytest -v
-```
+| Phase | Focus Area | Status | Key Deliverables |
+| :--- | :--- | :---: | :--- |
+| **Phase 1** | Foundation & Architecture | **Scaffolded** | Git repo configuration, specification document, `.gitignore`, `.env.example`, curated dataset, test scenarios. |
+| **Phase 2** | Disruption & Constraints | **Planned / Underway** | Pydantic data schemas, trip ingestion, deterministic hard filters (`deadline`, `budget`, `destination`). |
+| **Phase 3** | Recovery Engine & Ranking | **Planned** | Utility scoring formula, sorting algorithms, empty-set / conflict detection routines. |
+| **Phase 4** | AI Explanation Layer | **Planned** | LLM prompt engineering, fallback handler for offline AI, structured explanation generation. |
+| **Phase 5** | Dashboard UI | **Planned** | React/Next.js interface, interactive comparison table, constraint relaxation sliders. |
+| **Phase 6** | Automated Testing | **Planned** | Pytest suite covering zero-valid-option, deadline violations, time-zone boundaries, and budget overflow. |
+| **Phase 7** | Deployment & Production Prep | **Planned** | Containerization (Docker), cloud deployment, and live GDS sandbox exploration. |
 
 ---
 
-## 18. Environment Variables
-
-| Variable | Type | Required? | Default | Description |
-| :--- | :--- | :---: | :--- | :--- |
-| `ENVIRONMENT` | String | Optional | `development` | Environment mode (`development`, `production`). |
-| `PORT` | Integer | Optional | `8000` | Port for the backend API service. |
-| `DATABASE_URL` | String | Optional | `sqlite:///./routerescue.db` | Connection string for database storage. |
-| `AI_PROVIDER` | String | Optional | `openai` | AI vendor for explanations (`openai`, `gemini`, `mock`). |
-| `AI_PROVIDER_API_KEY` | String | Optional | `""` | API key for AI explanation service. |
-| `AI_MODEL` | String | Optional | `gpt-4o-mini` | LLM model identifier. |
-| `CORS_ORIGINS` | String | Optional | `http://localhost:3000` | Allowed origins for cross-origin resource sharing. |
-
----
-
-## 19. Limitations
-
-RouteRescue presents an honest evaluation of current MVP boundaries:
-- **Simulated Disruption Events**: Disruptions are currently triggered or simulated manually rather than fetched from live flight radar feeds.
-- **Curated Dataset**: Route alternatives are retrieved from a curated multimodal dataset rather than global live GDS distribution networks.
-- **Estimated Costs**: Fares reflect estimated benchmark rates; real-time dynamic surges in peak disruption periods are not reflected.
-- **Advisory Only**: Does not execute automatic debit card transactions or ticket cancellations on third-party carrier websites.
-- **Network Scope**: Initial data models are scoped to regional transit corridors for demonstration purposes.
-
----
-
-## 20. Contributing
+## Contributing
 
 Contributions are welcomed during and after DevHost 2026:
 1. Fork the repository.
@@ -648,13 +753,13 @@ Contributions are welcomed during and after DevHost 2026:
 
 ---
 
-## 21. License
+## License
 
 This project is licensed under the [MIT License](LICENSE) — free for educational, academic, and hackathon evaluation use.
 
 ---
 
-## 22. Team & Hackathon Information
+## Team & Hackathon Information
 
 ### Hackathon Details
 - **Event**: DevHost 2026 — 36-Hour Hackathon

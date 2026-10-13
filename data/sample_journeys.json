@@ -1,0 +1,80 @@
+[
+  {
+    "journey_id": "ALT-AI-502",
+    "origin": "BLR",
+    "destination": "DEL",
+    "carrier": "Air India 502",
+    "transport_mode": "flight",
+    "departure_time": "2026-10-15T05:00:00Z",
+    "arrival_time": "2026-10-15T07:15:00Z",
+    "duration_minutes": 135,
+    "estimated_fare": 3500.0,
+    "available_seats": 4,
+    "is_available": true
+  },
+  {
+    "journey_id": "ALT-UK-812",
+    "origin": "BLR",
+    "destination": "DEL",
+    "carrier": "Vistara 812",
+    "transport_mode": "flight",
+    "departure_time": "2026-10-15T05:30:00Z",
+    "arrival_time": "2026-10-15T07:45:00Z",
+    "duration_minutes": 135,
+    "estimated_fare": 6800.0,
+    "available_seats": 2,
+    "is_available": true
+  },
+  {
+    "journey_id": "ALT-IR-22691",
+    "origin": "BLR",
+    "destination": "DEL",
+    "carrier": "Rajdhani Express (22691)",
+    "transport_mode": "train",
+    "departure_time": "2026-10-15T06:00:00Z",
+    "arrival_time": "2026-10-15T11:30:00Z",
+    "duration_minutes": 330,
+    "estimated_fare": 1200.0,
+    "available_seats": 12,
+    "is_available": true
+  },
+  {
+    "journey_id": "ALT-QP-1332",
+    "origin": "BLR",
+    "destination": "DEL",
+    "carrier": "Akasa Air 1332",
+    "transport_mode": "flight",
+    "departure_time": "2026-10-15T08:15:00Z",
+    "arrival_time": "2026-10-15T10:45:00Z",
+    "duration_minutes": 150,
+    "estimated_fare": 2900.0,
+    "available_seats": 0,
+    "is_available": false
+  },
+  {
+    "journey_id": "ALT-6E-551",
+    "origin": "BLR",
+    "destination": "BOM",
+    "carrier": "IndiGo 551",
+    "transport_mode": "flight",
+    "departure_time": "2026-10-15T06:15:00Z",
+    "arrival_time": "2026-10-15T07:55:00Z",
+    "duration_minutes": 100,
+    "estimated_fare": 2400.0,
+    "available_seats": 8,
+    "is_available": true
+  },
+  {
+    "journey_id": "ALT-KSRTC-EXP",
+    "origin": "BLR",
+    "destination": "IXE",
+    "carrier": "KSRTC Flybus Express",
+    "transport_mode": "bus",
+    "departure_time": "2026-10-15T06:30:00Z",
+    "arrival_time": "2026-10-15T13:30:00Z",
+    "duration_minutes": 420,
+    "estimated_fare": 850.0,
+    "available_seats": 15,
+    "is_available": true
+  }
+]
